@@ -1,0 +1,48 @@
+<html style="zoom:0.8">
+
+<body>
+
+	<svg id="clocks" width="400" height="400">
+		
+		<rect width="100%" height="100%" fill="cornflowerblue"/>
+	<circle cx="200" cy="200" r="100" fill="azure"/>
+    <rect id="seconds" width="90" height="4" fill="lightblue" transform="translate (200 200)"/>
+    <rect id="minutes" width="80" height="6" fill="lightblue" transform="translate (200 200)"/>
+    <rect id="hours" width="70" height="8" fill="skyblue" transform="translate (200 200)"/>
+	</svg>
+	
+	<script>
+	
+		function $(id){
+			return document.getElementById(id);
+		}
+	
+		for(var m = 0; m < 12; m++){		
+			var angle = m*30;
+			$("clocks"). innerHTML +='<circle cx="100" cy="200" r="8" fill="skyblue" transform="rotate('+angle+' 200 200)"/>';
+		}	
+		
+		function pos( id, a )
+		{		
+		$(id).setAttribute("transform","rotate("+a+" 200 200 ) translate(200 200 )");
+		}
+		pos("seconds",45)
+		
+		setInterval(function(){
+		
+		var d=new Date();
+		var s=d.getSeconds()-15;
+		var m=d.getMinutes()-15;
+		var h=d.getHours()-3;
+		var z=h+d.getMinutes(1/60)
+		pos("seconds",s*6);
+		pos("minutes",m*6);
+		pos("hours",z*30);
+				
+		},1000);
+	</script>
+	
+</body>
+
+
+</html>
